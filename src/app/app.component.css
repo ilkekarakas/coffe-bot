@@ -28,7 +28,8 @@
 }
 
 #botname,
-#bot_image,
+/* #bot_image, */
+#avatar_image,
 #close {
     display: table-cell;
     vertical-align: middle;
@@ -67,6 +68,17 @@
     box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
     border-radius: 100%;
     background-image: url(..//images/im.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#avatar_image {
+    position: relative;
+    width: 90px;
+    height: 70px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
+    border-radius: 100%;
+    background-image: url(..//images/avatar.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -181,6 +193,78 @@
     box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
     border-radius: 100%;
     background-image: url(..//images/im.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.latteImg {
+    position: relative;
+    background-repeat: no-repeat;
+    float: left;
+
+    width: 180px;
+    height: 140px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
+    border-radius: 100%;
+    background-image: url(..//images/latte.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.cappuccinoImg {
+    position: relative;
+    background-repeat: no-repeat;
+    float: left;
+
+    width: 180px;
+    height: 140px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
+    border-radius: 100%;
+    background-image: url(..//images/cappuccino.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.espressoImg {
+    position: relative;
+    background-repeat: no-repeat;
+    float: left;
+
+    width: 180px;
+    height: 140px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
+    border-radius: 100%;
+    background-image: url(..//images/espresso.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.americanoImg {
+    position: relative;
+    background-repeat: no-repeat;
+    float: left;
+
+    width: 180px;
+    height: 140px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
+    border-radius: 100%;
+    background-image: url(..//images/americano.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.filterCoffeeImg {
+    position: relative;
+    background-repeat: no-repeat;
+    float: left;
+
+    width: 180px;
+    height: 140px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(52, 216, 249, 0.7);
+    border-radius: 100%;
+    background-image: url(..//images/filtercoffee.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }

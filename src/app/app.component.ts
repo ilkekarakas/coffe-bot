@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   chatModal = new Chatbox('Say hi');
   sendButton: boolean;
   bottext: string | undefined;
+  bottext2: string | undefined;
 
   @ViewChild('chatlogs', { read: ElementRef, static: false }) divMsgs:
     | ElementRef
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit {
     | undefined;
 
   title = 'Hilal İlke Karakaş Final Project';
-  subject = 'ChatBot';
+  subject = "İlke's ChatBot";
   coordinator = 'DR. ÖĞR. ÜYESİ Yılmaz AR';
 
   constructor(
@@ -82,6 +83,39 @@ export class AppComponent implements OnInit {
       const botimg = this.renderer.createElement('div');
       this.renderer.addClass(botimg, 'botimg');
       const botSub = this.renderer.createElement('div');
+
+      const botImageMain = this.renderer.createElement('div');
+      const botImageimg = this.renderer.createElement('div');
+      if (
+        this.chatModal.inputQuery.toLowerCase().includes('can i see your latte')
+      ) {
+        this.renderer.addClass(botImageimg, 'latteImg');
+      } else if (
+        this.chatModal.inputQuery
+          .toLowerCase()
+          .includes('can i see your cappuccino')
+      ) {
+        this.renderer.addClass(botImageimg, 'cappuccinoImg');
+      } else if (
+        this.chatModal.inputQuery
+          .toLowerCase()
+          .includes('can i see your filter coffee')
+      ) {
+        this.renderer.addClass(botImageimg, 'filterCoffeeImg');
+      } else if (
+        this.chatModal.inputQuery
+          .toLowerCase()
+          .includes('can i see your americano')
+      ) {
+        this.renderer.addClass(botImageimg, 'americanoImg');
+      } else if (
+        this.chatModal.inputQuery
+          .toLowerCase()
+          .includes('can i see your espresso')
+      ) {
+        this.renderer.addClass(botImageimg, 'espressoImg');
+      }
+      const botImageSub = this.renderer.createElement('div');
       //#endregion bot msg
 
       const response = this.dateSetService.giveAnswer(
@@ -89,6 +123,9 @@ export class AppComponent implements OnInit {
       );
       if (response != null) {
         this.bottext = this.renderer.createText(response);
+        if (response == 'Of course') {
+          this.bottext2 = this.renderer.createText('');
+        }
       }
 
       //#region Our input chat
@@ -98,6 +135,15 @@ export class AppComponent implements OnInit {
       this.renderer.appendChild(botMain, botSub);
       this.renderer.addClass(botMain, 'd-flex');
       this.renderer.appendChild(this.divMsgs?.nativeElement, botMain);
+
+      if (this.bottext2 != null) {
+        this.renderer.appendChild(botImageSub, botImageimg);
+        this.renderer.appendChild(botImageSub, this.bottext2);
+        this.renderer.addClass(botImageSub, 'botMsg');
+        this.renderer.appendChild(botImageMain, botImageSub);
+        this.renderer.addClass(botImageMain, 'd-flex');
+        this.renderer.appendChild(this.divMsgs?.nativeElement, botImageMain);
+      }
 
       var out = document.getElementById('chatlogs');
       var isScrolledToBottom =
@@ -115,6 +161,7 @@ export class AppComponent implements OnInit {
       audio.load();
       audio.play();
       this.chatModal.inputQuery = ''; //Reseting to empty for next query
+      this.bottext2 = undefined;
       return true;
       //#endregion Our input chat
     }
