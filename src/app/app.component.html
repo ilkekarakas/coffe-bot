@@ -1,20 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
-  <div style="text-align:center">
-    <h1>
-      {{ title }}
-    </h1>
-    <h1>
-      {{ subject }}
-    </h1>
-    <img src="https://upload.wikimedia.org/wikipedia/tr/5/5f/Ankara_Üniversitesi_logosu.png" style="width: 30vw;">
-    <h1>
-      {{ coordinator }}
-    </h1>
-  </div>
-  <div class="container">
-    <button class="Chat-icon" id="chatbot" data-toggle="modal" data-target="#ChatBot" data-backdrop="static"
-      data-keyboard="false"></button>
-  </div>
+<div style="text-align:center">
+  <br><br>
+  <h1 style="color: #0f4e8c;">
+    {{ title }}
+  </h1>
+  <h1 style="color: #e0c47d">
+    {{ subject }}
+  </h1>
+  <img src="https://upload.wikimedia.org/wikipedia/tr/5/5f/Ankara_Üniversitesi_logosu.png" style="width: 30vw;">
+  <h1 style="color: #0f4e8c;">
+    {{ coordinator }}
+  </h1>
+</div>
+<div class="container">
+  <button class="Chat-icon" id="chatbot" data-toggle="modal" data-target="#ChatBot" data-backdrop="static" data-keyboard="false"></button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="ChatBot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -26,8 +26,8 @@
       <div class="card">
         <div id="chat_header" class="card-title">
           <div class="d-flex justify-content-between">
-            <div class="p-2 pull-left rounded-circle" id="bot_image"></div>
-            <span class="p-2 h2" id="botname">CoffeBot</span>
+            <div class="p-2 pull-left rounded-circle" id="avatar_image"></div>
+            <span class="p-2 h2" id="botname">İlke's CoffeeBot</span>
             <span>
               <button type="button" style="margin-top: 10px;" class="btn btn-danger" (click)="chatlogs.innerHTML = ''">Delete Chat</button>
             </span>
@@ -42,9 +42,7 @@
             <div class="input-bar-item width100">
               <form #inputMsg="ngForm" (ngSubmit)="onSubmit()">
                 <div class="input-group">
-                  <input required placeholder="Enter Message here" (ngModelChange)="Empty()" type="text"
-                    class="form-control width100 rounded" name="chatModal.inputQuery"
-                    [(ngModel)]="chatModal.inputQuery">
+                  <input required placeholder="Enter Message here" (ngModelChange)="Empty()" type="text" class="form-control width100 rounded" name="chatModal.inputQuery" [(ngModel)]="chatModal.inputQuery">
                   <span *ngIf="sendButton==true" class="input-group-btn">
                     <button type="submit" style="background-color: #0f4e8c; border-color: #0f4e8c;" class="btn btn-danger btn-block rounded">
                       <i class="fa fa-paper-plane" aria-hidden="true"></i>
