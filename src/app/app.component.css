@@ -269,6 +269,11 @@
     background-repeat: no-repeat;
 }
 
+.d-flex2{
+    display: flex !important;
+    visibility: hidden;
+}
+
 @media only screen and (min-width: 150px) and (max-width: 600px) {
     .Chat-icon {
         position: relative;

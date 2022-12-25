@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DatasetService {
-  constructor() {}
+  constructor() { }
 
   randomStuff: Array<string> = [
     'Hello Nice to here you',
@@ -28,6 +28,24 @@ export class DatasetService {
     'filter coffee',
     'tiramisu',
     'cheescake',
+  ];
+  prices: Array<string> = [
+    'one shot espresso - $2.5',
+    'two shot espresso - $3',
+    'small cappuccino - $2',
+    'medium cappuccino - $4',
+    'large cappuccino - $5',
+    'small latte - $2',
+    'medium latte - $3',
+    'large latte - $4',
+    'small americano - $2',
+    'medium americano - $3',
+    'large americano - $4',
+    'small filter coffee - $1',
+    'medium filter coffee - $2',
+    'large filter coffee - $3',
+    'tiramisu - $5',
+    'cheescake - $5',
   ];
   menuDontHave: Array<string> = [
     'Not on the menu. :((',
@@ -58,6 +76,12 @@ export class DatasetService {
           selectedCoffeItem + ' ' + this.menuDontHave[this.generateRandom()];
         return cannotFindIt;
       }
+    } else if (inputString.toLowerCase().includes('can i see your price list')) {
+      var priceList = '';
+      this.prices.forEach((element) => {
+        priceList += element + ', ';
+      });
+      return priceList;
     } else if (
       inputString.toLowerCase().includes('what do yo have on your menu?')
     ) {
@@ -200,7 +224,8 @@ export class DatasetService {
       return 'I see that you want cappuccino. Which size?';
     } else if (inputString.toLowerCase().includes('espresso')) {
       return 'I see that you want espresso. Which size?';
-    } else {
+    }
+    else {
       return 'I do not understand you.';
     }
   }
