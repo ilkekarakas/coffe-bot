@@ -5,7 +5,7 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Chatbox } from './chatbox';
 import { DatasetService } from './services/dateset.service';
 declare var $: any;
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   sendButton: boolean;
   bottext: string | undefined;
   bottext2: string | undefined;
+  bottext3: string | undefined;
 
   @ViewChild('chatlogs', { read: ElementRef, static: false }) divMsgs:
     | ElementRef
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
   ) {
     this.sendButton = true;
   }
+
   ngOnInit() {
     $('#close').hover(
       function () {
@@ -61,7 +63,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.sendButton = false;
     if (this.chatModal.inputQuery == '') {
       return false;
@@ -84,8 +86,13 @@ export class AppComponent implements OnInit {
       this.renderer.addClass(botimg, 'botimg');
       const botSub = this.renderer.createElement('div');
 
+      const botMain3 = this.renderer.createElement('div');
+      const botSub3 = this.renderer.createElement('div');
+      this.bottext3 = this.renderer.createText('typing...');
+
       const botImageMain = this.renderer.createElement('div');
       const botImageimg = this.renderer.createElement('div');
+      // #region image
       if (
         this.chatModal.inputQuery.toLowerCase().includes('can i see your latte')
       ) {
@@ -115,6 +122,7 @@ export class AppComponent implements OnInit {
       ) {
         this.renderer.addClass(botImageimg, 'espressoImg');
       }
+      //#endregion image
       const botImageSub = this.renderer.createElement('div');
       //#endregion bot msg
 
@@ -122,10 +130,17 @@ export class AppComponent implements OnInit {
         this.chatModal.inputQuery
       );
       if (response != null) {
+        this.scroll();
+        this.typing(botMain3, botSub3);
+        this.scroll();
+        await new Promise<void>(resolve => setTimeout(() => resolve(), 1000)).then(() => console.log("fired"));
         this.bottext = this.renderer.createText(response);
+
         if (response == 'Of course') {
           this.bottext2 = this.renderer.createText('');
         }
+      } else {
+        this.scroll();
       }
 
       //#region Our input chat
@@ -135,6 +150,8 @@ export class AppComponent implements OnInit {
       this.renderer.appendChild(botMain, botSub);
       this.renderer.addClass(botMain, 'd-flex');
       this.renderer.appendChild(this.divMsgs?.nativeElement, botMain);
+      this.renderer.removeClass(botMain3, 'd-flex')
+      this.renderer.addClass(botSub3, 'd-flex2')
 
       if (this.bottext2 != null) {
         this.renderer.appendChild(botImageSub, botImageimg);
@@ -143,27 +160,47 @@ export class AppComponent implements OnInit {
         this.renderer.appendChild(botImageMain, botImageSub);
         this.renderer.addClass(botImageMain, 'd-flex');
         this.renderer.appendChild(this.divMsgs?.nativeElement, botImageMain);
+        this.renderer.removeClass(botMain3, 'd-flex')
+        this.renderer.addClass(botSub3, 'd-flex2')
+
       }
 
-      var out = document.getElementById('chatlogs');
-      var isScrolledToBottom =
-        out != null
-          ? out.scrollHeight - out.clientHeight <= out.scrollTop + 1
-          : null;
-      if (!isScrolledToBottom)
-        if (out != null) {
-          out.scrollTop = out.scrollHeight - out.clientHeight;
-        }
-
+      this.scroll();
       //Audio click
       let audio = new Audio();
       audio.src = '../../../assets/audio/tick.mp3';
       audio.load();
       audio.play();
-      this.chatModal.inputQuery = ''; //Reseting to empty for next query
       this.bottext2 = undefined;
+      this.bottext3 = "";
       return true;
       //#endregion Our input chat
     }
+  }
+
+  scroll() {
+    var out = document.getElementById('chatlogs');
+    var isScrolledToBottom =
+      out != null
+        ? out.scrollHeight - out.clientHeight <= out.scrollTop + 1
+        : null;
+    if (!isScrolledToBottom)
+      if (out != null) {
+        out.scrollTop = out.scrollHeight - out.clientHeight;
+      }
+    this.chatModal.inputQuery = ''; //Reseting to empty for next query
+  }
+
+  typing(botMain3: any, botSub3: any) {
+    this.renderer.appendChild(botSub3, this.bottext3);
+    this.renderer.addClass(botSub3, 'botMsg');
+    this.renderer.appendChild(botMain3, botSub3);
+    this.renderer.addClass(botMain3, 'd-flex');
+    this.renderer.appendChild(this.divMsgs?.nativeElement, botMain3);
+  }
+
+  faq(string: string) {
+    this.chatModal.inputQuery = string;
+    this.onSubmit();
   }
 }
