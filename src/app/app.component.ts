@@ -19,7 +19,7 @@ declare var $: any;
 })
 export class AppComponent implements OnInit {
   TextMsg: FormGroup | undefined;
-  chatModal = new Chatbox('Say hi');
+  chatModal = new Chatbox('hi');
   sendButton: boolean;
   bottext: string | undefined;
   bottext2: string | undefined;

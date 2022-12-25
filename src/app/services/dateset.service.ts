@@ -26,6 +26,8 @@ export class DatasetService {
     'latte',
     'americano',
     'filter coffee',
+    'tiramisu',
+    'cheescake',
   ];
   menuDontHave: Array<string> = [
     'Not on the menu. :((',
@@ -43,20 +45,27 @@ export class DatasetService {
   giveAnswer(inputString: String) {
     if (inputString.toLowerCase().includes('your name')) {
       return "Call Me İlke's CoffeeBot";
-    }
-    if (inputString.toLowerCase().includes('who are you')) {
+    } else if (inputString.toLowerCase().includes('who are you')) {
       return "Call Me İlke's CoffeeBot";
-    } else if (inputString.toLowerCase().includes('do you have')) {
+    }
+    if (inputString.toLowerCase().includes('do you have')) {
       var selectedCoffeItem = inputString.split('do you have ')[1];
       if (this.menuItems.find((x) => x == selectedCoffeItem)) {
-        var findIt =
-          selectedCoffeItem + ' menüde bulunuyor, siparişiniz hazırlanıyor.';
+        var findIt = selectedCoffeItem + ' is in our menu';
         return findIt;
       } else {
         var cannotFindIt =
           selectedCoffeItem + ' ' + this.menuDontHave[this.generateRandom()];
         return cannotFindIt;
       }
+    } else if (
+      inputString.toLowerCase().includes('what do yo have on your menu?')
+    ) {
+      var menu = '';
+      this.menuItems.forEach((element) => {
+        menu += element + ', ';
+      });
+      return menu;
     } else if (inputString.toLowerCase().includes('what can you do')) {
       return 'With my service you can order easily.';
     } else if (
